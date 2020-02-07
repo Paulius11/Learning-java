@@ -1,4 +1,4 @@
-package Lambda_Praktika_2.testClasses;
+package testClasses;
 
 public class Employee {
     private int price;
@@ -9,5 +9,12 @@ public class Employee {
 
     public int getSalary() {
         return price;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "price=" + price +
+                '}';
     }
 }

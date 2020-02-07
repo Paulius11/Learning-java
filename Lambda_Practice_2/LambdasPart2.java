@@ -1,4 +1,4 @@
-import Lambda_Praktika_2.testClasses.Employee;
+import testClasses.Employee;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -70,9 +70,9 @@ return the second String. Here are two examples of how your code should work whe
     (the first lambda example returns whichever of string1 and string2 is longer, and the second lambda
             example always returns string1).
     • String string1 = ...;
-• String string2 = ...;
-• String longer = StringUtils.betterString(string1, string2, (s1, s2) -> s1.length() > s2.length());
-• String first = StringUtils.betterString(string1, string2, (s1, s2) -> true);
+    • String string2 = ...;
+    • String longer = StringUtils.betterString(string1, string2, (s1, s2) -> s1.length() > s2.length());
+    • String first = StringUtils.betterString(string1, string2, (s1, s2) -> true);
 Accomplishing all of this requires you to do three things:
 • Define the TwoStringPredicate interface. It will specify a method that takes 2 strings and returns a
 boolean. This interface is normal Java 7 code.
@@ -90,7 +90,7 @@ is normal Java 7 code.
         print(longer);
 
 /*
-    3. Making generically-typed interfaces for which lambdas can be used. Use generics to replace
+3. Making generically-typed interfaces for which lambdas can be used. Use generics to replace
 
 your String-specific solutions to problem 3 with generically typed solutions. That is, replace better-
 String with betterEntry and TwoStringPredicate with TwoElementPredicate. Make sure your previ-
@@ -98,19 +98,16 @@ ous examples still work when you only change betterString to betterElement. But,
 
 also be able to supply two Cars and a Car predicate, two Employees and an Employee predicate,
 etc. For example:
-• ElementUtils.betterElement(string1, string2, (s1, s2) -> s1.length() > s2.length())
-• ElementUtils.betterElement(car1, car2, (c1, c2) -> c1.getPrice() > c2.getPrice())
-• ElementUtils.betterElement(employee1, employee2, (e1, e2) -> e1.getSalary() > e2.getSalary())
+    • ElementUtils.betterElement(string1, string2, (s1, s2) -> s1.length() > s2.length())
+    • ElementUtils.betterElement(car1, car2, (c1, c2) -> c1.getPrice() > c2.getPrice())
+    • ElementUtils.betterElement(employee1, employee2, (e1, e2) -> e1.getSalary() > e2.getSalary())
 
 */
 
-        String string3 = "python";
-        String string4 = "c++";
         Employee employee1 = new Employee(100);
         Employee employee2 = new Employee(1000);
 
-        //TODO: fix generics
-        String aws = ElementUtils.betterElement(string3, string4, (s1, s2) -> s1.toString().length() > s2.toString().length());
+        String aws = ElementUtils.betterElement("python", "c++", (s1, s2) -> s1.length() > s2.length());
         Employee emp = ElementUtils.betterElement(
                 employee1, employee2,
                 (e1, e2) -> employee1.getSalary() > employee2.getSalary());
