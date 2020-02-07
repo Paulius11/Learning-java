@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class Taks {
+public class Run {
     /*
         Some general notes:
         • Arrays.asList is a simple way to make a List. E.g.:
