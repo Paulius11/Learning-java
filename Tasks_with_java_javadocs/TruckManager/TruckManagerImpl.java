@@ -5,7 +5,7 @@ import lt.itakademija.exam.Packet;
 import lt.itakademija.exam.Truck;
 import lt.itakademija.exam.TruckManager;
 
-public class TruckManagerImpl  implements TruckManager {
+public class TruckManagerImpl implements TruckManager {
 
 	private List<Truck> truckList = new ArrayList<>();
 	private List<Packet> paketList = new ArrayList<>();
@@ -19,13 +19,6 @@ public class TruckManagerImpl  implements TruckManager {
 
 	@Override
 	public List<Packet> getPackets(String truckId) {
-//		List<Packet> newList = new ArrayList<>();
-//		for(Truck truck: truckList) {
-//			if(truck.getId().equals(truckId))
-//				for(Packet p: truck.getPackets())
-//					newList.add(p);
-//		}
-//		return newList;
 		return getTruckById(truckId).getPackets();
 	}
 
@@ -46,7 +39,6 @@ public class TruckManagerImpl  implements TruckManager {
 
 	@Override
 	public Packet registerPacket(String id, int volume) {
-		// TODO Auto-generated method stub
 		if (volume <= 0 || id.isEmpty())
 			throw new IllegalArgumentException();
 
@@ -64,6 +56,12 @@ public class TruckManagerImpl  implements TruckManager {
 		Truck truck = new Truck(id, capacity);
 		truckList.add(truck);
 		return truck;
+	}
+
+	public double getAveragePackageVolume(String truckId) {
+		List<Packet> pakets = getTruckById(truckId).getPackets();
+		return pakets.stream().map(Packet::getVolume).reduce(0, Integer::sum);
+
 	}
 
 }
