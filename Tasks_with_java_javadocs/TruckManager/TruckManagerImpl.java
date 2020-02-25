@@ -1,10 +1,15 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import lt.itakademija.exam.Packet;
 import lt.itakademija.exam.Truck;
 import lt.itakademija.exam.TruckManager;
 
+/**
+ * @author Sup
+ *
+ */
 public class TruckManagerImpl implements TruckManager {
 
 	private List<Truck> truckList = new ArrayList<>();
@@ -58,10 +63,43 @@ public class TruckManagerImpl implements TruckManager {
 		return truck;
 	}
 
+	/**
+	 * Gets average of specified truck name
+	 * 
+	 * @param truckId - truck you want to find an average of
+	 * @return packet average
+	 */
 	public double getAveragePackageVolume(String truckId) {
 		List<Packet> pakets = getTruckById(truckId).getPackets();
 		return pakets.stream().map(Packet::getVolume).reduce(0, Integer::sum);
 
+	}
+
+	/**
+	 * Gets truck name with biggest Capacity
+	 * 
+	 * @return Truck name, if null return ""
+	 */
+	public String getBiggestCapacityTruckName() {
+		int maxCapacity = 0;
+		String truckName = "";
+		for (Truck truck : truckList) {
+			if (truck.getCapacity() > maxCapacity) {
+				maxCapacity = truck.getCapacity();
+				truckName = truck.getId();
+			}
+
+		}
+		return truckName;
+	}
+
+	/**
+	 * Gets largest truck volume from truck list
+	 * 
+	 * @return volume integer, if null return 0
+	 */
+	public Integer getBiggestCapacityTruck() {
+		return truckList.stream().map(Truck::getCapacity).reduce(Integer::max).orElse(0);
 	}
 
 }

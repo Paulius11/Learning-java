@@ -1,3 +1,5 @@
+import java.util.Optional;
+
 import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Before;
@@ -11,11 +13,7 @@ public class CustomTests {
 
 	@Before
 	public void setUp() throws Exception {
-		transportManager = createTransportManager();
-	}
-
-	private TruckManagerImpl createTransportManager() {
-		return new TruckManagerImpl();
+		transportManager = new TruckManagerImpl();
 	}
 
 	@Test
@@ -34,6 +32,25 @@ public class CustomTests {
 		double expectedVolume = this.transportManager.getAveragePackageVolume(truckId);
 
 		Assert.assertThat(expectedVolume, Matchers.is(6.0));
+	}
+
+	@Test
+	public void testGetBiggestCapacityTrucksName() {
+		Truck registeredTruckBIG = transportManager.registerTruck("Truck-BIG", 100);
+		Truck registeredTruckMEDIUM = transportManager.registerTruck("Truck-MEDIUM", 50);
+		String biggestCapacityTruck = this.transportManager.getBiggestCapacityTruckName();
+		Assert.assertThat(biggestCapacityTruck, Matchers.is("Truck-BIG"));
+		Assert.assertNotEquals(biggestCapacityTruck, "Truck-MEDIUM");
+	}
+
+	@Test
+	public void testGetBiggestTruckCapacity() {
+		Truck registeredTruckBIG = transportManager.registerTruck("Truck-BIG", 150);
+		Truck registeredTruckMEDIUM = transportManager.registerTruck("Truck-MEDIUM", 50);
+		Integer biggestCapacityTruck = this.transportManager.getBiggestCapacityTruck();
+
+		Assert.assertThat(biggestCapacityTruck, Matchers.is(150));
+
 	}
 
 }
