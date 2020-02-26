@@ -1,3 +1,5 @@
+package BaseTests;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,7 +16,6 @@ public class WerehouseImpl extends Warehouse {
 	private List<Package> packages = new LinkedList<>();
 	private List<Client> clients = new LinkedList<>();
 	private int totalSpace;
-	private IdGenerator generateor = new IdGenerator();
 
 	public WerehouseImpl(IdGenerator clientIdGenerator, IdGenerator packageIdGenerator, int totalSpace_) {
 		super(clientIdGenerator, packageIdGenerator, totalSpace_);
@@ -28,7 +29,7 @@ public class WerehouseImpl extends Warehouse {
 	public Package createPackage(String name, int space) {
 		if (space <= 0)
 			throw new IllegalArgumentException();
-		Package newPackage = new Package(new IdGenerator().generateId(), name, space);
+		Package newPackage = new Package(packageIdGenerator.generateId(), name, space);
 		packages.add(newPackage);
 		return newPackage;
 	}
@@ -79,13 +80,12 @@ public class WerehouseImpl extends Warehouse {
 
 	@Override
 	public Client registerClient(String name, int reservingSpace) {
-		//TODO: fix generateId
 		if (reservingSpace <= 0)
 			throw new IllegalArgumentException();
 		if (reservingSpace > this.totalSpace)
 			throw new InsufficientSpaceException(name);
 
-		Client newClient = new Client(generateor.generateId(), name, reservingSpace);
+		Client newClient = new Client(clientIdGenerator.generateId(), name, reservingSpace);
 		clients.add(newClient);
 		return newClient;
 	}
