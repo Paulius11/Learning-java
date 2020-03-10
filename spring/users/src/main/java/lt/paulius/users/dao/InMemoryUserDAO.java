@@ -10,7 +10,13 @@ import lt.paulius.users.model.User;
 
 @Repository
 public class InMemoryUserDAO implements UserDAO {
-	private final List<User> userList = new CopyOnWriteArrayList<>();
+	private static List<User> userList = new CopyOnWriteArrayList<>();
+
+	static {
+		userList.add(new User("testusername1", "John", "surname1", "test@test.lt"));
+		userList.add(new User("testusername2", "Doa", "Aod", "doa@aod.lt"));
+
+	}
 
 	@Override
 	public List<User> getUsers() {

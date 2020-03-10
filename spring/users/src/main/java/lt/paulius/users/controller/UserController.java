@@ -28,9 +28,7 @@ public class UserController {
 
 	@Autowired
 	public UserController(UserDAO userDao) {
-
 		this.userDao = userDao;
-		userDao.createUser(new User("testusername1", "John", "surname1", "test@test.lt"));
 
 	}
 
