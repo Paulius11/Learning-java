@@ -2,6 +2,8 @@ package lt.paulius.users.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -49,7 +51,7 @@ public class UserController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public User createUser(@RequestBody final CreateUserCommand postReceivedUserData) {
+	public User createUser(@Valid @RequestBody final CreateUserCommand postReceivedUserData) {
 
 		System.out.println(postReceivedUserData);
 		User newUserFromPost = new User();
