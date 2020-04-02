@@ -1,8 +1,5 @@
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map.Entry;
 
 public class StorageFacility {
@@ -10,12 +7,10 @@ public class StorageFacility {
 	private HashMap<String, ArrayList<String>> arrayMap = new HashMap<>();
 
 	public void add(String unit, String item) {
-		if (map.containsKey(unit)) {
+		if (arrayMap.get(unit) != null) {
 			arrayMap.get(unit).add(item);
 		} else {
 			arrayMap.put(unit, new ArrayList<String>());
-			arrayMap.get(unit).add(item);
-			map.put(unit, item);
 		}
 
 	}
